@@ -6,7 +6,7 @@ Mini view is minimal template rendering library
 
 ## Install
 
-	composer require maslosoft/miniview *
+	composer require maslosoft/miniview
 
 ## Manual install
 
