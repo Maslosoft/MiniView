@@ -35,8 +35,4 @@ Mini view is minimal template rendering library
 
 	}
 
-Calling `show()` will return rendered view file located in `classFolder/views/myView.php` with variable `$user` with value `Joe`.
-
-### Run example
-
-Go to examples folder and type `php run.php`
+Calling `show()` will return rendered view file located in `classFolder/views/myView.php` with variable `$user` with value `Joe`
