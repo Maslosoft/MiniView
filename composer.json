@@ -10,8 +10,8 @@
 	],
 	"minimum-stability": "stable",
 	"autoload": {
-		"psr-0": {
-			"Maslosoft\\MiniView": "./"
+		"psr-4": {
+			"Maslosoft\\MiniView\\": "src/"
 		}
 	},
 	"require": {}
