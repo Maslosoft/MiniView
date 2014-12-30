@@ -31,11 +31,16 @@ class MiniView
 	 */
 	private $_owner = null;
 
-	public function __construct($owner)
+	/**
+	 * Create MiniView instance. If path is not set, it will be based on location of owner class.
+	 * @param object $owner
+	 * @param string $path
+	 */
+	public function __construct($owner, $path = null)
 	{
 		$this->_owner = $owner;
 		$class = new ReflectionObject($this->_owner);
-		$this->path = sprintf('%s/views', dirname($class->getFileName()));
+		$this->path = sprintf('%s/views', $path? : dirname($class->getFileName()));
 	}
 
 	/**
