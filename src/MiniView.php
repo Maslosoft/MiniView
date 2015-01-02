@@ -40,7 +40,7 @@ class MiniView
 	{
 		$this->_owner = $owner;
 		$class = new ReflectionObject($this->_owner);
-		$this->path = sprintf('%s/views', $path? : dirname($class->getFileName()));
+		$this->_path = sprintf('%s/views', $path? : dirname($class->getFileName()));
 	}
 
 	/**
