@@ -2,6 +2,7 @@
 	"name": "maslosoft/miniview",
 	"description": "Mini view is minimal template rendering library based on Yii controller renderer",
 	"license": "New BSD",
+	"homepage": "http://maslosoft.com/miniview/",
 	"authors": [
 		{
 			"name": "Peter Maselkowski",
@@ -14,5 +15,8 @@
 			"Maslosoft\\MiniView\\": "src/"
 		}
 	},
-	"require": {}
+	"require": {},
+	"require-dev": {
+		"maslosoft/hedron": "~1.0"
+	}
 }
