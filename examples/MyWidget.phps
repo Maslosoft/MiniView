@@ -8,7 +8,7 @@
 
 namespace Company\SomeNamespace;
 
-use Maslosoft\Addendum\Helpers\MiniView;
+use Maslosoft\MiniView;
 
 class MyWidget
 {

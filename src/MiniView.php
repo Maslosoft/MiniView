@@ -11,7 +11,7 @@
 * @link http://maslosoft.com/miniview/
 */
 
-namespace Maslosoft\Addendum\Helpers;
+namespace Maslosoft\MiniView;
 
 use ReflectionObject;
 
