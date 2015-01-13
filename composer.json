@@ -15,8 +15,7 @@
 			"Maslosoft\\MiniView\\": "src/"
 		}
 	},
-	"require": {},
 	"require-dev": {
-		"maslosoft/hedron": "~1.0"
+		"maslosoft/hedron": "~1"
 	}
 }
