@@ -1,7 +1,7 @@
 {
 	"name": "maslosoft/miniview",
 	"description": "Mini view is minimal template rendering library based on Yii controller renderer",
-	"license": "AGPL/Commercial",
+	"license": "AGPL or Commercial",
 	"homepage": "http://maslosoft.com/miniview/",
 	"authors": [
 		{
