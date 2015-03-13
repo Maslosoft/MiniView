@@ -13,7 +13,7 @@
 
 ### Quick Install
 ```bash
-	composer require maslosoft/miniview:"*"
+composer require maslosoft/miniview:"*"
 ```
 
 <!--/header-->
