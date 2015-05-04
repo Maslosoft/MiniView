@@ -112,6 +112,18 @@ class MiniView
 	}
 
 	/**
+	 * Render file with data provided.
+	 * @param string $file
+	 * @param mixed[] $data
+	 * @param bool $return
+	 * @return string
+	 */
+	public function renderFile($file, $data = null, $return = false)
+	{
+		return $this->_renderInternal($file, $data, $return);
+	}
+	
+	/**
 	 * Renders a view file.
 	 * This method includes the view file as a PHP script
 	 * and captures the display result if required.
