@@ -410,9 +410,10 @@ pre code, pre tt {
 <!--/header-->
 
 <a name="usage"></a><h2>Usage<a class="anchorlink" href="#usage"></a></h2>
+<p>This is some example widget using MiniView:</p>
 <pre class="prettyprint">namespace Company\SomeNamespace;
 
-use Maslosoft\MiniView;
+use Maslosoft\MiniView\MiniView;
 
 class MyWidget
 {
@@ -423,9 +424,15 @@ class MyWidget
      */
     public $view = null;
 
+    /**
+     * @var string
+     */
+    public $version = &#39;&#39;;
+
     public function __construct()
     {
         $this-&gt;view = new MiniView($this);
+        $this-&gt;version = $this-&gt;view-&gt;getVersion();
     }
 
     public function show()
@@ -433,8 +440,26 @@ class MyWidget
         return $this-&gt;view-&gt;render(&#39;myView&#39;, [&#39;user&#39; =&gt; &#39;Joe&#39;], true);
     }
 
+    public function greet($name)
+    {
+        return &quot;Nice to meet you $name!&quot; . PHP_EOL;
+    }
 }</pre>
-<p>Calling <code>show()</code> will return rendered view file located in <code>classFolder/views/myView.php</code> with variable <code>$user</code> with value <code>Joe</code></p>
+<p>In view file, all widget public properties as well as methods are available using <code>$this</code>.
+View file is located in folder <code>views</code> located in same folder as widget class.</p>
+<p>Example view file:</p>
+<pre class="prettyprint">Hello &lt;?= $user ?&gt;!
+&lt;?= $this-&gt;greet($user);?&gt;
+The version is &lt;?= $this-&gt;version;?&gt;</pre>
+<p>Calling <code>show()</code> will return rendered view file located in <code>classFolder/views/myView.php</code> with variable <code>$user</code> with value <code>Joe</code>.</p>
+<pre class="prettyprint">use Company\SomeNamespace\MyWidget;
+
+require __DIR__ . &#39;/../src/Miniview.php&#39;;
+require __DIR__ . &#39;/MyWidget.phps&#39;;
+
+$widget = new MyWidget;
+
+echo $widget-&gt;show();</pre>
 <a name="run_example"></a><h3>Run example<a class="anchorlink" href="#run_example"></a></h3>
 <p>Go to examples folder and type <code>php run.php</code></p>
 

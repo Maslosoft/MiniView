@@ -20,32 +20,68 @@ composer require maslosoft/miniview:"*"
 
 ## Usage
 
-	namespace Company\SomeNamespace;
+This is some example widget using MiniView:
 
-	use Maslosoft\MiniView;
+```php
+namespace Company\SomeNamespace;
 
-	class MyWidget
+use Maslosoft\MiniView\MiniView;
+
+class MyWidget
+{
+
+	/**
+	 * View renderer
+	 * @var MiniView
+	 */
+	public $view = null;
+	
+	/**
+	 * @var string
+	 */
+	public $version = '';
+
+	public function __construct()
 	{
-
-		/**
-		 * View renderer
-		 * @var MiniView
-		 */
-		public $view = null;
-
-		public function __construct()
-		{
-			$this->view = new MiniView($this);
-		}
-
-		public function show()
-		{
-			return $this->view->render('myView', ['user' => 'Joe'], true);
-		}
-
+		$this->view = new MiniView($this);
+		$this->version = $this->view->getVersion();
 	}
 
-Calling `show()` will return rendered view file located in `classFolder/views/myView.php` with variable `$user` with value `Joe`
+	public function show()
+	{
+		return $this->view->render('myView', ['user' => 'Joe'], true);
+	}
+
+	public function greet($name)
+	{
+		return "Nice to meet you $name!" . PHP_EOL;
+	}
+}
+```
+
+In view file, all widget public properties as well as methods are available using `$this`.
+View file is located in folder `views` located in same folder as widget class.
+
+Example view file:
+
+```php
+Hello <?= $user ?>!
+<?= $this->greet($user);?>
+The version is <?= $this->version;?>
+```
+
+Calling `show()` will return rendered view file located in `classFolder/views/myView.php` with variable `$user` with value `Joe`.
+
+```php
+use Company\SomeNamespace\MyWidget;
+
+require __DIR__ . '/../src/Miniview.php';
+require __DIR__ . '/MyWidget.phps';
+
+$widget = new MyWidget;
+
+echo $widget->show();
+```
 
 ### Run example
 
