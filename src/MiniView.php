@@ -1,15 +1,15 @@
 <?php
 
 /**
-* This software package is licensed under New BSD license.
-* 
-* @package maslosoft/miniview
-* @licence New BSD
-* 
-* @copyright Copyright (c) Peter Maselkowski <pmaselkowski@gmail.com>
-* 
-* @link http://maslosoft.com/miniview/
-*/
+ * This software package is licensed under New BSD license.
+ *
+ * @package maslosoft/miniview
+ * @licence New BSD
+ *
+ * @copyright Copyright (c) Peter Maselkowski <pmaselkowski@gmail.com>
+ *
+ * @link http://maslosoft.com/miniview/
+ */
 
 namespace Maslosoft\MiniView;
 
@@ -23,6 +23,12 @@ use ReflectionObject;
  */
 class MiniView
 {
+
+	/**
+	 * Current version
+	 * @var string
+	 */
+	private $_version = '';
 
 	/**
 	 * View path
@@ -44,6 +50,7 @@ class MiniView
 	public function __construct($owner, $path = null)
 	{
 		$this->_owner = $owner;
+		$this->_version = require __DIR__ . '/version.php';
 		$class = new ReflectionObject($this->_owner);
 		$this->_path = $path? : dirname($class->getFileName());
 	}
@@ -65,7 +72,7 @@ class MiniView
 	 */
 	public function __set($name, $value)
 	{
-		$this->_owner->$name = $value;
+		return $this->_owner->$name = $value;
 	}
 
 	/**
@@ -75,7 +82,7 @@ class MiniView
 	 */
 	public function __call($name, $arguments)
 	{
-		call_user_func_array([$this->_owner, $name], $arguments);
+		return call_user_func_array([$this->_owner, $name], $arguments);
 	}
 
 	/**
@@ -95,6 +102,15 @@ class MiniView
 	public function __unset($name)
 	{
 		unset($this->_owner->$name);
+	}
+
+	/**
+	 * Get current MiniView version
+	 * @return string Version string
+	 */
+	public function getVersion()
+	{
+		return $this->_version;
 	}
 
 	/**
@@ -122,7 +138,7 @@ class MiniView
 	{
 		return $this->_renderInternal($file, $data, $return);
 	}
-	
+
 	/**
 	 * Renders a view file.
 	 * This method includes the view file as a PHP script
