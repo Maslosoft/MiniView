@@ -41,6 +41,12 @@ class MiniView
 	 * @var object
 	 */
 	private $_owner = null;
+	
+	/**
+	 * View path. This is relative to base path.
+	 * @var string
+	 */
+	private $_viewsPath = 'views';
 
 	/**
 	 * Create MiniView instance. If path is not set, it will be based on location of owner class.
@@ -114,8 +120,18 @@ class MiniView
 	}
 
 	/**
+	 * Set views path. This is relative path for view resolving.
+	 * By default it's `views` folder.
+	 * @param string $path
+	 */
+	public function setViewsPath($path)
+	{
+		$this->_viewsPath = $path;
+	}
+	
+	/**
 	 * Render view with data provided.
-	 * View name must be
+	 * View name must not contain `php` extension.
 	 * @param string $view
 	 * @param mixed[] $data
 	 * @param bool $return
@@ -123,7 +139,7 @@ class MiniView
 	 */
 	public function render($view, $data = null, $return = false)
 	{
-		$viewFile = sprintf('%s/views/%s.php', $this->_path, $view);
+		$viewFile = sprintf('%s/%s/%s.php', $this->_path, $this->_viewsPath, $view);
 		return $this->_renderInternal($viewFile, $data, $return);
 	}
 
