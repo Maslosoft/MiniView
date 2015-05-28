@@ -20,6 +20,7 @@ use ReflectionObject;
  * Based on Yii CWidget
  * @author Piotr Maselkowski <pmaselkowski at gmail.com>
  * @author Qiang Xue <qiang.xue@gmail.com>
+ * @property string @version Current MiniView version
  */
 class MiniView
 {
@@ -28,7 +29,7 @@ class MiniView
 	 * Current version
 	 * @var string
 	 */
-	private $_version = '';
+	private static $_version = null;
 
 	/**
 	 * View path
@@ -56,7 +57,6 @@ class MiniView
 	public function __construct($owner, $path = null)
 	{
 		$this->_owner = $owner;
-		$this->_version = require __DIR__ . '/version.php';
 		$class = new ReflectionObject($this->_owner);
 		$this->_path = $path? : dirname($class->getFileName());
 	}
@@ -116,7 +116,11 @@ class MiniView
 	 */
 	public function getVersion()
 	{
-		return $this->_version;
+		if(null === self::$_version)
+		{
+			self::$_version = require __DIR__ . '/version.php';
+		}
+		return self::$_version;
 	}
 
 	/**
