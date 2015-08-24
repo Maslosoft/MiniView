@@ -42,7 +42,7 @@ class MiniView
 	 * @var object
 	 */
 	private $_owner = null;
-	
+
 	/**
 	 * View path. This is relative to base path.
 	 * @var string
@@ -116,7 +116,7 @@ class MiniView
 	 */
 	public function getVersion()
 	{
-		if(null === self::$_version)
+		if (null === self::$_version)
 		{
 			self::$_version = require __DIR__ . '/version.php';
 		}
@@ -132,7 +132,7 @@ class MiniView
 	{
 		$this->_viewsPath = $path;
 	}
-	
+
 	/**
 	 * Render view with data provided.
 	 * View name must not contain `php` extension.
