@@ -111,6 +111,15 @@ class MiniView
 	}
 
 	/**
+	 * Forward __toString to owner
+	 * @return string
+	 */
+	public function __toString()
+	{
+		return (string) $this->_owner;
+	}
+
+	/**
 	 * Get current MiniView version
 	 * @return string Version string
 	 */
