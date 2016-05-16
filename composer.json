@@ -20,5 +20,9 @@
 	},
 	"require-dev": {
 		"maslosoft/hedron": "~1"
+	},
+	"require": {
+		"codeception/codeception": "*",
+		"latte/latte": "^2"
 	}
 }
