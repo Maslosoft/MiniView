@@ -13,4 +13,4 @@ matrix:
 install:
   - composer install --prefer-dist
 script:
-  - ./run-travis
+  - run-travis
