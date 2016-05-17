@@ -37,7 +37,6 @@ class PhpRenderer implements ViewRendererInterface, OwnerAwareInterface, OwnerFo
 	 */
 	public function render($_viewFile_, $_data_, $_return_ = false)
 	{
-		$_viewFile_ = sprintf('%s.php', $_viewFile_);
 		// we use special variable names here to avoid conflict when extracting data
 		if (is_array($_data_))
 		{

@@ -3,6 +3,7 @@
 namespace Renderers;
 
 use Maslosoft\MiniView\MiniView;
+use Maslosoft\MiniView\Renderers\PhpRenderer;
 use UnitTester;
 
 class PhpTest extends \Codeception\TestCase\Test
@@ -27,6 +28,18 @@ class PhpTest extends \Codeception\TestCase\Test
 		$view = new MiniView($this);
 
 		$result = $view->render('passVariable', ['var' => $var], true);
+
+		$this->assertSame($var, $result);
+	}
+
+	// tests
+	public function testIfWillPassVariableToViewWithRendererDetection()
+	{
+		$var = 'New Variable';
+
+		$view = new MiniView($this);
+		$view->setRenderer(new PhpRenderer());
+		$result = $view->render('passVariable.php', ['var' => $var], true);
 
 		$this->assertSame($var, $result);
 	}

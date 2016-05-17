@@ -16,6 +16,8 @@ namespace Maslosoft\MiniView;
 use Maslosoft\MiniView\Interfaces\OwnerAwareInterface;
 use Maslosoft\MiniView\Interfaces\RendererAwareInterface;
 use Maslosoft\MiniView\Interfaces\ViewRendererInterface;
+use Maslosoft\MiniView\Renderers\LatteRenderer;
+use Maslosoft\MiniView\Renderers\PhpRenderer;
 use ReflectionObject;
 
 /**
@@ -30,6 +32,11 @@ class MiniView implements ViewRendererInterface, OwnerAwareInterface, RendererAw
 
 	use Traits\OwnerAwareTrait,
 	  Traits\RendererAwareTrait;
+
+	public $renderers = [
+		'latte' => LatteRenderer::class,
+		'php' => PhpRenderer::class
+	];
 
 	/**
 	 * Current version
@@ -85,7 +92,28 @@ class MiniView implements ViewRendererInterface, OwnerAwareInterface, RendererAw
 
 	/**
 	 * Render view with data provided.
-	 * View name must not contain `php` extension.
+	 * View name may contain `php` extension. If no extension is passed or
+	 * it not match extensions from renderer configuration,
+	 * it will append extension based on current renderer.
+	 *
+	 * Example with default or previously set renderer:
+	 *
+	 * ```php
+	 * $view->render('myView');
+	 * ```
+	 *
+	 * Example with enforced php renderer:
+	 *
+	 * ```php
+	 * $view->render('myView.php');
+	 * ```
+	 *
+	 * Example with enforced latte renderer:
+	 * 
+	 * ```php
+	 * $view->render('myView.latte');
+	 * ```
+	 *
 	 * @param string $view
 	 * @param mixed[] $data
 	 * @param bool $return
@@ -94,7 +122,41 @@ class MiniView implements ViewRendererInterface, OwnerAwareInterface, RendererAw
 	public function render($view, $data = null, $return = false)
 	{
 		$viewFile = sprintf('%s/%s/%s', $this->getPath(), $this->viewsPath, $view);
-		return $this->getRenderer()->render($viewFile, $data, $return);
+		$extensions = array_keys($this->renderers);
+		$pattern = sprintf('~\.(%s)$~', implode('|', $extensions));
+		$currentRenderer = $this->getRenderer();
+
+		// Append extension if not set
+		if (!preg_match($pattern, $view, $matches))
+		{
+			// Get extension from current renderer
+			foreach ($this->renderers as $extension => $rendererMatch)
+			{
+				if ($currentRenderer instanceof $rendererMatch)
+				{
+					break;
+				}
+			}
+
+			// Set proper extension
+			$viewFile = sprintf('%s.%s', $viewFile, $extension);
+		}
+
+		// Matched extension, detect renderer
+		if (!empty($matches) && !empty($matches[1]))
+		{
+			$key = $matches[1];
+			$rendererClass = $this->renderers[$key];
+			// Set proper renderer
+			if (!$currentRenderer instanceof $rendererClass)
+			{
+				// Use setRenderer as it contains additional logic
+				$this->setRenderer(new $rendererClass);
+			}
+		}
+		$result = $this->getRenderer()->render($viewFile, $data, $return);
+		$this->setRenderer($currentRenderer);
+		return $result;
 	}
 
 	/**

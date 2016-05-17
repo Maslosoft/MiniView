@@ -26,7 +26,6 @@ class LatteRenderer implements ViewRendererInterface
 
 	public function render($viewFile, $data, $return = false)
 	{
-		$viewFile = sprintf('%s.latte', $viewFile);
 		$latte = new Engine();
 		$latte->setTempDirectory('runtime');
 		if ($return)
