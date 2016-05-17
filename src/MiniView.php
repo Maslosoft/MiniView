@@ -130,6 +130,7 @@ class MiniView implements ViewRendererInterface, OwnerAwareInterface, RendererAw
 		if (!preg_match($pattern, $view, $matches))
 		{
 			// Get extension from current renderer
+			$extension = 'php';
 			foreach ($this->renderers as $extension => $rendererMatch)
 			{
 				if ($currentRenderer instanceof $rendererMatch)
