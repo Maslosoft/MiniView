@@ -23,6 +23,7 @@
 	},
 	"require": {
 		"codeception/codeception": "*",
-		"latte/latte": "^2"
+		"latte/latte": "^2",
+		"twig/twig": "*"
 	}
 }
