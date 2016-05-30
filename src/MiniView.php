@@ -18,6 +18,7 @@ use Maslosoft\MiniView\Interfaces\RendererAwareInterface;
 use Maslosoft\MiniView\Interfaces\ViewRendererInterface;
 use Maslosoft\MiniView\Renderers\LatteRenderer;
 use Maslosoft\MiniView\Renderers\PhpRenderer;
+use Maslosoft\MiniView\Renderers\TwigRenderer;
 use ReflectionObject;
 
 /**
@@ -35,7 +36,8 @@ class MiniView implements ViewRendererInterface, OwnerAwareInterface, RendererAw
 
 	public $renderers = [
 		'latte' => LatteRenderer::class,
-		'php' => PhpRenderer::class
+		'php' => PhpRenderer::class,
+		'twig' => TwigRenderer::class
 	];
 
 	/**
