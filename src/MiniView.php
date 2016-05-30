@@ -86,10 +86,12 @@ class MiniView implements ViewRendererInterface, OwnerAwareInterface, RendererAw
 	 * Set views path. This is relative path for view resolving.
 	 * By default it's `views` folder.
 	 * @param string $path
+	 * @return static
 	 */
 	public function setViewsPath($path)
 	{
 		$this->viewsPath = $path;
+		return $this;
 	}
 
 	/**

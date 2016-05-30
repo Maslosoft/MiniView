@@ -27,14 +27,24 @@ trait OwnerAwareTrait
 	 */
 	private $owner = null;
 
+	/**
+	 * Get view owner
+	 * @return object
+	 */
 	public function getOwner()
 	{
 		return $this->owner;
 	}
 
+	/**
+	 * Set view owner
+	 * @param object $owner
+	 * @return static
+	 */
 	public function setOwner($owner)
 	{
 		$this->owner = $owner;
+		return $this;
 	}
 
 }

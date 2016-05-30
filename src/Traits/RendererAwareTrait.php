@@ -47,6 +47,7 @@ trait RendererAwareTrait
 	/**
 	 * Set renderer
 	 * @param ViewRendererInterface $renderer
+	 * @return static
 	 */
 	public function setRenderer(ViewRendererInterface $renderer)
 	{
@@ -55,6 +56,7 @@ trait RendererAwareTrait
 			$renderer->setOwner($this->getOwner());
 		}
 		$this->renderer = $renderer;
+		return $this;
 	}
 
 	abstract public function getOwner();
