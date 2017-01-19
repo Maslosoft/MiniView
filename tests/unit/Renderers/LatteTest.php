@@ -20,7 +20,7 @@ class LatteTest extends Test
 
 	protected function _before()
 	{
-		if (!class_exists(Engine::class) or true)
+		if (!class_exists(Engine::class))
 		{
 			throw new PHPUnit_Framework_SkippedTestError('Latte engine not installed');
 		}

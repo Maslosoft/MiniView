@@ -20,7 +20,7 @@ class TwigTest extends Test
 
 	protected function _before()
 	{
-		if (!class_exists(Twig_Environment::class) or true)
+		if (!class_exists(Twig_Environment::class))
 		{
 			throw new PHPUnit_Framework_SkippedTestError('Twig engine not installed');
 		}
