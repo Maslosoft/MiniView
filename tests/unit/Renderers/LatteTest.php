@@ -2,12 +2,15 @@
 
 namespace Renderers;
 
+use Codeception\TestCase\Test;
+use Latte\Engine;
 use Maslosoft\MiniView\MiniView;
 use Maslosoft\MiniView\Renderers\LatteRenderer;
 use Maslosoft\MiniView\Renderers\PhpRenderer;
+use PHPUnit_Framework_SkippedTestError;
 use UnitTester;
 
-class LatteTest extends \Codeception\TestCase\Test
+class LatteTest extends Test
 {
 
 	/**
@@ -15,9 +18,18 @@ class LatteTest extends \Codeception\TestCase\Test
 	 */
 	protected $tester;
 
+	protected function _before()
+	{
+		if (!class_exists(Engine::class) or true)
+		{
+			throw new PHPUnit_Framework_SkippedTestError('Latte engine not installed');
+		}
+	}
+
 	// tests
 	public function testIfWillPassVariableToView()
 	{
+
 		$var = 'New Variable';
 
 		$view = new MiniView($this);

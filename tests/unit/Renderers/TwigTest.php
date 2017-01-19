@@ -2,18 +2,29 @@
 
 namespace Renderers;
 
+use Codeception\TestCase\Test;
 use Maslosoft\MiniView\MiniView;
 use Maslosoft\MiniView\Renderers\PhpRenderer;
 use Maslosoft\MiniView\Renderers\TwigRenderer;
+use PHPUnit_Framework_SkippedTestError;
+use Twig_Environment;
 use UnitTester;
 
-class TwigTest extends \Codeception\TestCase\Test
+class TwigTest extends Test
 {
 
 	/**
 	 * @var UnitTester
 	 */
 	protected $tester;
+
+	protected function _before()
+	{
+		if (!class_exists(Twig_Environment::class) or true)
+		{
+			throw new PHPUnit_Framework_SkippedTestError('Twig engine not installed');
+		}
+	}
 
 	// tests
 	public function testIfWillPassVariableToView()

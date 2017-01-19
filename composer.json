@@ -22,8 +22,10 @@
 		"maslosoft/hedron": "~1"
 	},
 	"require": {
-		"codeception/codeception": "*",
-		"latte/latte": "^2",
-		"twig/twig": "*"
+		"codeception/codeception": "*"
+	},
+	"suggest": {
+		"latte/latte": "Use tatte templates",
+		"twig/twig": "Use twig templates"
 	}
 }
