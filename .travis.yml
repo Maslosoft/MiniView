@@ -17,5 +17,7 @@ cache:
     - vendor
 install:
   - composer install --prefer-dist
+  - composer require twig/twig
+  - composer require latte/latte
 script:
   - bash run-travis
