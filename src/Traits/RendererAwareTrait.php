@@ -58,6 +58,4 @@ trait RendererAwareTrait
 		$this->renderer = $renderer;
 		return $this;
 	}
-
-	abstract public function getOwner();
 }
