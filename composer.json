@@ -19,8 +19,9 @@
 		}
 	},
 	"require-dev": {
-		"maslosoft/hedron": "~1",
-		"codeception/codeception": "*"
+		"maslosoft/hedron": "^1",
+		"codeception/codeception": "^4",
+		"codeception/module-asserts": "^1"
 	},
 	"require": {
 	},

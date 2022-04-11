@@ -6,7 +6,7 @@ use Codeception\TestCase\Test;
 use Maslosoft\MiniView\MiniView;
 use Maslosoft\MiniView\Renderers\PhpRenderer;
 use Maslosoft\MiniView\Renderers\TwigRenderer;
-use PHPUnit_Framework_SkippedTestError;
+use PHPUnit\Framework\SkippedTestError;
 use Twig_Environment;
 use UnitTester;
 
@@ -22,7 +22,7 @@ class TwigTest extends Test
 	{
 		if (!class_exists(Twig_Environment::class))
 		{
-			throw new PHPUnit_Framework_SkippedTestError('Twig engine not installed');
+			throw new SkippedTestError('Twig engine not installed');
 		}
 	}
 

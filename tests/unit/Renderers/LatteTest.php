@@ -7,7 +7,7 @@ use Latte\Engine;
 use Maslosoft\MiniView\MiniView;
 use Maslosoft\MiniView\Renderers\LatteRenderer;
 use Maslosoft\MiniView\Renderers\PhpRenderer;
-use PHPUnit_Framework_SkippedTestError;
+use PHPUnit\Framework\SkippedTestError;
 use UnitTester;
 
 class LatteTest extends Test
@@ -22,7 +22,7 @@ class LatteTest extends Test
 	{
 		if (!class_exists(Engine::class))
 		{
-			throw new PHPUnit_Framework_SkippedTestError('Latte engine not installed');
+			throw new SkippedTestError('Latte engine not installed');
 		}
 	}
 
