@@ -57,17 +57,6 @@ class PhpTest extends Test
 		$this->assertSame($var, $result);
 	}
 
-	public function testIfWillProperlyRenderInView(): void
-	{
-		$value = 'Sub View';
-
-		$view = new MiniView($this);
-		$view->setRenderer(new PhpRenderer());
-		$result = $view->render('inView.php', null, true);
-
-		$this->assertSame($value, $result);
-	}
-
 	public function testIfWillForwardMethodToOwner(): void
 	{
 		$view = new MiniView($this);
@@ -91,8 +80,4 @@ class PhpTest extends Test
 		return 'my value from method';
 	}
 
-	public function render($view): ?string
-	{
-		return (new MiniView($this))->render($view);
-	}
 }
