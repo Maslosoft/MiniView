@@ -73,7 +73,7 @@ class MiniView implements ViewRendererInterface, OwnerAwareInterface, RendererAw
 	 * Get current MiniView version
 	 * @return string Version string
 	 */
-	public function getVersion()
+	public function getVersion(): string
 	{
 		if (null === self::$version)
 		{

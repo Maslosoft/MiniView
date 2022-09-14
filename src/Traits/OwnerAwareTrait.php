@@ -23,15 +23,15 @@ trait OwnerAwareTrait
 
 	/**
 	 * Owner class
-	 * @var object
+	 * @var object|null
 	 */
-	private $owner = null;
+	private ?object $owner = null;
 
 	/**
 	 * Get view owner
-	 * @return object
+	 * @return object|null
 	 */
-	public function getOwner()
+	public function getOwner(): ?object
 	{
 		return $this->owner;
 	}
@@ -39,12 +39,10 @@ trait OwnerAwareTrait
 	/**
 	 * Set view owner
 	 * @param object $owner
-	 * @return static
 	 */
-	public function setOwner($owner)
+	public function setOwner($owner): void
 	{
 		$this->owner = $owner;
-		return $this;
 	}
 
 }

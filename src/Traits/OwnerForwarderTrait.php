@@ -26,7 +26,7 @@ trait OwnerForwarderTrait
 	 * @param string $name
 	 * @return mixed
 	 */
-	public function __get($name)
+	public function __get(string $name)
 	{
 		return $this->getOwner()->$name;
 	}
@@ -34,19 +34,20 @@ trait OwnerForwarderTrait
 	/**
 	 * Forward to owner
 	 * @param string $name
-	 * @param mixed $value
+	 * @param mixed  $value
 	 */
-	public function __set($name, $value)
+	public function __set(string $name, mixed $value): void
 	{
-		return $this->getOwner()->$name = $value;
+		$this->getOwner()->$name = $value;
 	}
 
 	/**
 	 * Forward to owner
 	 * @param string $name
-	 * @param mixed[] $arguments
+	 * @param array  $arguments
+	 * @return mixed
 	 */
-	public function __call($name, $arguments)
+	public function __call(string $name, array $arguments)
 	{
 		return call_user_func_array([$this->getOwner(), $name], $arguments);
 	}
@@ -56,7 +57,7 @@ trait OwnerForwarderTrait
 	 * @param string $name
 	 * @return bool
 	 */
-	public function __isset($name)
+	public function __isset(string $name)
 	{
 		return isset($this->getOwner()->$name);
 	}
@@ -65,7 +66,7 @@ trait OwnerForwarderTrait
 	 * Forward to owner
 	 * @param string $name
 	 */
-	public function __unset($name)
+	public function __unset(string $name)
 	{
 		unset($this->getOwner()->$name);
 	}

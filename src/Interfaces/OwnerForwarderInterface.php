@@ -25,34 +25,34 @@ interface OwnerForwarderInterface
 	 * @param string $name
 	 * @return mixed
 	 */
-	public function __get($name);
+	public function __get(string $name);
 
 	/**
 	 * Forward to owner
 	 * @param string $name
-	 * @param mixed $value
+	 * @param mixed  $value
 	 */
-	public function __set($name, $value);
+	public function __set(string $name, mixed $value): void;
 
 	/**
 	 * Forward to owner
 	 * @param string $name
-	 * @param mixed[] $arguments
+	 * @param array  $arguments
 	 */
-	public function __call($name, $arguments);
+	public function __call(string $name, array $arguments);
 
 	/**
 	 * Forward to owner
 	 * @param string $name
 	 * @return bool
 	 */
-	public function __isset($name);
+	public function __isset(string $name);
 
 	/**
 	 * Forward to owner
 	 * @param string $name
 	 */
-	public function __unset($name);
+	public function __unset(string $name);
 
 	/**
 	 * Forward __toString to owner

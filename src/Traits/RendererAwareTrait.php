@@ -35,7 +35,7 @@ trait RendererAwareTrait
 	 * Get renderer
 	 * @return ViewRendererInterface
 	 */
-	public function getRenderer()
+	public function getRenderer(): ViewRendererInterface
 	{
 		if (null === $this->renderer)
 		{
@@ -47,15 +47,13 @@ trait RendererAwareTrait
 	/**
 	 * Set renderer
 	 * @param ViewRendererInterface $renderer
-	 * @return static
 	 */
-	public function setRenderer(ViewRendererInterface $renderer)
+	public function setRenderer(ViewRendererInterface $renderer): void
 	{
 		if ($renderer instanceof OwnerAwareInterface)
 		{
 			$renderer->setOwner($this->getOwner());
 		}
 		$this->renderer = $renderer;
-		return $this;
 	}
 }
