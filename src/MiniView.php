@@ -123,7 +123,7 @@ class MiniView implements ViewRendererInterface, OwnerAwareInterface, RendererAw
 	 * @param bool       $return
 	 * @return string|null
 	 */
-	public function render(string $view, ?array $data = null, bool $return = false): ?string
+	public function render(string $view, array $data = null, bool $return = false): ?string
 	{
 		$viewFile = sprintf('%s/%s/%s', $this->getPath(), $this->viewsPath, $view);
 		$extensions = array_keys($this->renderers);
