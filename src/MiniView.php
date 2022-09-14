@@ -20,6 +20,7 @@ use Maslosoft\MiniView\Renderers\LatteRenderer;
 use Maslosoft\MiniView\Renderers\PhpRenderer;
 use Maslosoft\MiniView\Renderers\TwigRenderer;
 use ReflectionObject;
+use function var_dump;
 
 /**
  * MiniRender
@@ -34,7 +35,7 @@ class MiniView implements ViewRendererInterface, OwnerAwareInterface, RendererAw
 	use Traits\OwnerAwareTrait,
 	  Traits\RendererAwareTrait;
 
-	public $renderers = [
+	public array $renderers = [
 		'latte' => LatteRenderer::class,
 		'php' => PhpRenderer::class,
 		'twig' => TwigRenderer::class
@@ -42,28 +43,28 @@ class MiniView implements ViewRendererInterface, OwnerAwareInterface, RendererAw
 
 	/**
 	 * Current version
-	 * @var string
+	 * @var string|null
 	 */
-	private static $version = null;
+	private static ?string $version = null;
 
 	/**
 	 * View path
-	 * @var string
+	 * @var string|null
 	 */
-	private $path = '';
+	private ?string $path = '';
 
 	/**
 	 * View path. This is relative to base path.
 	 * @var string
 	 */
-	private $viewsPath = 'views';
+	private string $viewsPath = 'views';
 
 	/**
 	 * Create MiniView instance. If path is not set, it will be based on location of owner class.
-	 * @param object $owner
-	 * @param string $path
+	 * @param object      $owner
+	 * @param string|null $path
 	 */
-	public function __construct($owner, $path = null)
+	public function __construct(object $owner, string $path = null)
 	{
 		$this->path = $path;
 		$this->setOwner($owner);
@@ -86,12 +87,15 @@ class MiniView implements ViewRendererInterface, OwnerAwareInterface, RendererAw
 	 * Set views path. This is relative path for view resolving.
 	 * By default, it's `views` folder.
 	 * @param string $path
-	 * @return static
 	 */
-	public function setViewsPath(string $path): MiniView
+	public function setViewsPath(string $path): void
 	{
 		$this->viewsPath = $path;
-		return $this;
+	}
+
+	public function renderAlias(string $view, array $data = null, bool $return = false): ?string
+	{
+		return $this->render($view, $data, $return);
 	}
 
 	/**

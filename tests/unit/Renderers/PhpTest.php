@@ -46,7 +46,6 @@ class PhpTest extends Test
 		$this->assertSame($var, $result);
 	}
 
-	// tests
 	public function testIfWillPassVariableToViewWithRendererDetection(): void
 	{
 		$var = 'New Variable';
@@ -56,6 +55,17 @@ class PhpTest extends Test
 		$result = $view->render('passVariable.php', ['var' => $var], true);
 
 		$this->assertSame($var, $result);
+	}
+
+	public function testIfWillProperlyRenderInView(): void
+	{
+		$value = 'Sub View';
+
+		$view = new MiniView($this);
+		$view->setRenderer(new PhpRenderer());
+		$result = $view->render('inView.php', null, true);
+
+		$this->assertSame($value, $result);
 	}
 
 	public function testIfWillForwardMethodToOwner(): void
@@ -81,4 +91,8 @@ class PhpTest extends Test
 		return 'my value from method';
 	}
 
+	public function render($view): ?string
+	{
+		return (new MiniView($this))->render($view);
+	}
 }
