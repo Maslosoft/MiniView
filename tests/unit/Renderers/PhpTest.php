@@ -2,11 +2,14 @@
 
 namespace Renderers;
 
+use Codeception\TestCase\Test;
 use Maslosoft\MiniView\MiniView;
 use Maslosoft\MiniView\Renderers\PhpRenderer;
 use UnitTester;
+use function codecept_debug;
+use function trim;
 
-class PhpTest extends \Codeception\TestCase\Test
+class PhpTest extends Test
 {
 
 	/**
@@ -21,7 +24,18 @@ class PhpTest extends \Codeception\TestCase\Test
 	public $value = 'property value';
 
 	// tests
-	public function testIfWillPassVariableToView()
+	public function testRenderingWithoutVariable(): void
+	{
+		$view = new MiniView($this);
+
+		$result = $view->render('noVariable', null, true);
+
+		codecept_debug(trim($result));
+
+		$this->assertStringContainsString('Hello', $result);
+	}
+
+	public function testIfWillPassVariableToView(): void
 	{
 		$var = 'New Variable';
 
@@ -33,7 +47,7 @@ class PhpTest extends \Codeception\TestCase\Test
 	}
 
 	// tests
-	public function testIfWillPassVariableToViewWithRendererDetection()
+	public function testIfWillPassVariableToViewWithRendererDetection(): void
 	{
 		$var = 'New Variable';
 
@@ -44,7 +58,7 @@ class PhpTest extends \Codeception\TestCase\Test
 		$this->assertSame($var, $result);
 	}
 
-	public function testIfWillForwardMethodToOwner()
+	public function testIfWillForwardMethodToOwner(): void
 	{
 		$view = new MiniView($this);
 
@@ -53,7 +67,7 @@ class PhpTest extends \Codeception\TestCase\Test
 		$this->assertSame($this->getValue(), $result);
 	}
 
-	public function testIfWillForwardPropertyToOwner()
+	public function testIfWillForwardPropertyToOwner(): void
 	{
 		$view = new MiniView($this);
 
@@ -62,7 +76,7 @@ class PhpTest extends \Codeception\TestCase\Test
 		$this->assertSame($this->value, $result);
 	}
 
-	public function getValue()
+	public function getValue(): string
 	{
 		return 'my value from method';
 	}
