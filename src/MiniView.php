@@ -84,11 +84,11 @@ class MiniView implements ViewRendererInterface, OwnerAwareInterface, RendererAw
 
 	/**
 	 * Set views path. This is relative path for view resolving.
-	 * By default it's `views` folder.
+	 * By default, it's `views` folder.
 	 * @param string $path
 	 * @return static
 	 */
-	public function setViewsPath($path)
+	public function setViewsPath(string $path): MiniView
 	{
 		$this->viewsPath = $path;
 		return $this;
@@ -97,7 +97,7 @@ class MiniView implements ViewRendererInterface, OwnerAwareInterface, RendererAw
 	/**
 	 * Render view with data provided.
 	 * View name may contain `php` extension. If no extension is passed or
-	 * it not match extensions from renderer configuration,
+	 * if it not matches extensions from renderer configuration,
 	 * it will append extension based on current renderer.
 	 *
 	 * Example with default or previously set renderer:
@@ -113,17 +113,17 @@ class MiniView implements ViewRendererInterface, OwnerAwareInterface, RendererAw
 	 * ```
 	 *
 	 * Example with enforced latte renderer:
-	 * 
+	 *
 	 * ```php
 	 * $view->render('myView.latte');
 	 * ```
 	 *
-	 * @param string $view
-	 * @param mixed[] $data
-	 * @param bool $return
-	 * @return string
+	 * @param string     $view
+	 * @param array|null $data
+	 * @param bool       $return
+	 * @return string|null
 	 */
-	public function render($view, $data = null, $return = false)
+	public function render(string $view, array $data = null, bool $return = false): ?string
 	{
 		$viewFile = sprintf('%s/%s/%s', $this->getPath(), $this->viewsPath, $view);
 		$extensions = array_keys($this->renderers);
@@ -166,17 +166,17 @@ class MiniView implements ViewRendererInterface, OwnerAwareInterface, RendererAw
 
 	/**
 	 * Render file with data provided.
-	 * @param string $file
-	 * @param mixed[] $data
-	 * @param bool $return
+	 * @param string     $file
+	 * @param array|null $data
+	 * @param bool       $return
 	 * @return string
 	 */
-	public function renderFile($file, $data = null, $return = false)
+	public function renderFile(string $file, array $data = null, bool $return = false): string
 	{
 		return $this->getRenderer()->render($file, $data, $return);
 	}
 
-	function getPath()
+	public function getPath(): string
 	{
 		if (empty($this->path))
 		{

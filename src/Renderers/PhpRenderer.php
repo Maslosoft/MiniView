@@ -16,6 +16,8 @@ namespace Maslosoft\MiniView\Renderers;
 use Maslosoft\MiniView\Interfaces\OwnerAwareInterface;
 use Maslosoft\MiniView\Interfaces\OwnerForwarderInterface;
 use Maslosoft\MiniView\Interfaces\ViewRendererInterface;
+use Maslosoft\MiniView\Traits\OwnerAwareTrait;
+use Maslosoft\MiniView\Traits\OwnerForwarderTrait;
 
 /**
  * PhpRenderer
@@ -25,17 +27,17 @@ use Maslosoft\MiniView\Interfaces\ViewRendererInterface;
 class PhpRenderer implements ViewRendererInterface, OwnerAwareInterface, OwnerForwarderInterface
 {
 
-	use \Maslosoft\MiniView\Traits\OwnerAwareTrait,
-	  \Maslosoft\MiniView\Traits\OwnerForwarderTrait;
+	use OwnerAwareTrait,
+	  OwnerForwarderTrait;
 
 	/**
 	 * Render php file
 	 * @param string $_viewFile_
-	 * @param mixed $_data_
-	 * @param bool $_return_
-	 * @return string
+	 * @param mixed  $_data_
+	 * @param bool   $_return_
+	 * @return string|null
 	 */
-	public function render($_viewFile_, $_data_, $_return_ = false)
+	public function render(string $_viewFile_, array $_data_ = null, bool $_return_ = false): ?string
 	{
 		// we use special variable names here to avoid conflict when extracting data
 		if (is_array($_data_))
@@ -53,10 +55,9 @@ class PhpRenderer implements ViewRendererInterface, OwnerAwareInterface, OwnerFo
 			require($_viewFile_);
 			return ob_get_clean();
 		}
-		else
-		{
-			require($_viewFile_);
-		}
+
+		require($_viewFile_);
+		return null;
 	}
 
 }

@@ -18,11 +18,20 @@
 			"Maslosoft\\MiniView\\": "src/"
 		}
 	},
+	"autoload-dev": {
+		"psr-4": {
+			"Tests\\Widgets\\": "tests/widgets"
+		}
+	},
 	"require-dev": {
 		"codeception/codeception": "^4",
-		"codeception/module-asserts": "^1"
+		"codeception/module-asserts": "^1",
+		"latte/latte": "^3",
+		"twig/twig": "^3"
 	},
 	"require": {
+		"php": ">=8.1",
+		"maslosoft/embedi": "^2"
 	},
 	"suggest": {
 		"latte/latte": "Use tatte templates",

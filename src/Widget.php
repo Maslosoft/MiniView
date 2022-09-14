@@ -3,65 +3,81 @@
 /**
  * This software package is licensed under `AGPL, Commercial` license[s].
  *
- * @package maslosoft/miniview
- * @license AGPL, Commercial
+ * @package   maslosoft/miniview
+ * @license   AGPL, Commercial
  *
  * @copyright Copyright (c) Peter Maselkowski <pmaselkowski@gmail.com>
  *
- * @link http://maslosoft.com/miniview/
+ * @link      http://maslosoft.com/miniview/
  */
 
 namespace Maslosoft\MiniView;
 
 use Exception;
+use Maslosoft\EmbeDi\EmbeDi;
+use Maslosoft\MiniView\Interfaces\WidgetInterface;
 use ReflectionObject;
+use UnexpectedValueException;
+use function is_array;
 
 /**
  * Widget
  *
  * @author Piotr Maselkowski <pmaselkowski at gmail.com>
  */
-abstract class Widget
+abstract class Widget implements WidgetInterface
 {
+	/**
+	 * ID Prefix used when auto generating ID's
+	 * msmvw stands for "Maslosoft Mini View Widget"
+	 */
+	public const IdPrefix = 'msmvw';
+	public const DefaultViewsPath = 'views';
 
 	/**
-	 * @var string id of the widget.
+	 * @var string|null id of the widget.
 	 */
-	private $_id;
+	private ?string $_id = null;
 
 	/**
 	 * View path
 	 * @var string
 	 */
-	private $_path = '';
+	private string $_path;
+
+	/**
+	 * @var string
+	 */
+	private string $_viewsPath = self::DefaultViewsPath;
 
 	/**
 	 * Configuration
-	 * @var mixed[]
+	 * @var string|array
 	 */
-	private $config = [];
+	private string|array $config;
 
 	/**
-	 * Id counter for automatically generated id's
-	 * @var intr
+	 * ID counter for automatically generated id's
+	 * @var int
 	 */
-	private static $idCounter = 0;
+	private static int $idCounter = 0;
 
 	/**
 	 * Owner, default to current class
 	 * @var Widget
 	 */
-	private $owner;
+	private Widget $owner;
 
 	/**
 	 * Create widget with optional config
-	 * @param mixed[] $config
+	 * @param string|array $config
+	 * @param Widget|null  $owner
 	 */
-	public function __construct($config = [], $owner = null)
+	public function __construct(string|array $config = [], Widget $owner = null)
 	{
 		$class = new ReflectionObject($this);
 		$this->_path = dirname($class->getFileName());
-		if (!empty($owner))
+		if ($owner !== null)
 		{
 			$this->owner = $owner;
 		}
@@ -70,46 +86,49 @@ abstract class Widget
 			$this->owner = $this;
 		}
 		$this->config = $config;
+		EmbeDi::fly()->apply($this->config, $this);
 	}
 
 	/**
 	 * Initializes the widget
 	 */
-	abstract public function init();
+	abstract public function init(): void;
 
 	/**
 	 * Executes the widget.
 	 */
-	abstract public function run();
+	abstract public function run(): string;
 
 	/**
 	 * Forward to owner
 	 * @param string $name
 	 * @return mixed
 	 */
-	public function __get($name)
+	public function __get(string $name)
 	{
-		return $this->_owner->$name;
+		return $this->owner->$name;
 	}
 
 	/**
 	 * Forward to owner
 	 * @param string $name
-	 * @param mixed $value
+	 * @param mixed  $value
+	 * @return mixed
 	 */
-	public function __set($name, $value)
+	public function __set(string $name, mixed $value)
 	{
-		return $this->_owner->$name = $value;
+		return $this->owner->$name = $value;
 	}
 
 	/**
 	 * Forward to owner
 	 * @param string $name
-	 * @param mixed[] $arguments
+	 * @param array  $arguments
+	 * @return mixed
 	 */
-	public function __call($name, $arguments)
+	public function __call(string $name, array $arguments)
 	{
-		return call_user_func_array([$this->_owner, $name], $arguments);
+		return call_user_func_array([$this->owner, $name], $arguments);
 	}
 
 	/**
@@ -117,29 +136,29 @@ abstract class Widget
 	 * @param string $name
 	 * @return bool
 	 */
-	public function __isset($name)
+	public function __isset(string $name)
 	{
-		return isset($this->_owner->$name);
+		return isset($this->owner->$name);
 	}
 
 	/**
 	 * Forward to owner
 	 * @param string $name
 	 */
-	public function __unset($name)
+	public function __unset(string $name)
 	{
-		unset($this->_owner->$name);
+		unset($this->owner->$name);
 	}
 
 	/**
 	 * Returns the ID of the widget or generates a new one if not set.
 	 * @return string id of the widget.
 	 */
-	public function getId()
+	public function getId(): string
 	{
 		if ($this->_id === null)
 		{
-			$this->_id = sprtinf('msmv-%s', self::$idCounter++);
+			$this->_id = sprintf('%s-%s', self::IdPrefix, self::$idCounter++);
 		}
 		return $this->_id;
 	}
@@ -148,26 +167,26 @@ abstract class Widget
 	 * Sets the ID of the widget.
 	 * @param string $value id of the widget.
 	 */
-	public function setId($value)
+	public function setId(string $value): void
 	{
 		$this->_id = $value;
 	}
 
 	/**
 	 * Returns the owner/creator of this widget.
-	 * @return object owner/creator of this widget. It could be either a widget or a controller.
+	 * @return Widget owner/creator of this widget.
 	 */
-	public function getOwner()
+	public function getOwner(): Widget
 	{
-		return $this->_owner;
+		return $this->owner;
 	}
 
 	/**
 	 * Set views path. This is relative path for view resolving.
-	 * By default it's `views` folder.
+	 * By default, it's `views` folder.
 	 * @param string $path
 	 */
-	public function setViewsPath($path)
+	public function setViewsPath(string $path): void
 	{
 		$this->_viewsPath = $path;
 	}
@@ -175,12 +194,12 @@ abstract class Widget
 	/**
 	 * Render view with data provided.
 	 * View name must not contain `php` extension.
-	 * @param string $view
-	 * @param mixed[] $data
-	 * @param bool $return
-	 * @return string
+	 * @param string     $view
+	 * @param array|null $data
+	 * @param bool       $return
+	 * @return string|null
 	 */
-	public function render($view, $data = null, $return = false)
+	public function render(string $view, array $data = null, bool $return = false): ?string
 	{
 		$viewFile = sprintf('%s/%s/%s.php', $this->_path, $this->_viewsPath, $view);
 		return $this->_renderInternal($viewFile, $data, $return);
@@ -188,12 +207,12 @@ abstract class Widget
 
 	/**
 	 * Render file with data provided.
-	 * @param string $file
-	 * @param mixed[] $data
-	 * @param bool $return
-	 * @return string
+	 * @param string     $file
+	 * @param array|null $data
+	 * @param bool       $return
+	 * @return string|null
 	 */
-	public function renderFile($file, $data = null, $return = false)
+	public function renderFile(string $file, array $data = null, bool $return = false): ?string
 	{
 		return $this->_renderInternal($file, $data, $return);
 	}
@@ -202,12 +221,12 @@ abstract class Widget
 	 * Renders a view file.
 	 * This method includes the view file as a PHP script
 	 * and captures the display result if required.
-	 * @param string $_viewFile_ view file
-	 * @param array $_data_ data to be extracted and made available to the view file
-	 * @param boolean $_return_ whether the rendering result should be returned as a string
-	 * @return string the rendering result. Null if the rendering result is not required.
+	 * @param string     $_viewFile_ view file
+	 * @param array|null $_data_     data to be extracted and made available to the view file
+	 * @param boolean    $_return_   whether the rendering result should be returned as a string
+	 * @return string|null the rendering result. Null if the rendering result is not required.
 	 */
-	private function _renderInternal($_viewFile_, $_data_ = null, $_return_ = false)
+	private function _renderInternal(string $_viewFile_, array $_data_ = null, bool $_return_ = false): ?string
 	{
 		// we use special variable names here to avoid conflict when extracting data
 		if (is_array($_data_))
@@ -225,10 +244,9 @@ abstract class Widget
 			require($_viewFile_);
 			return ob_get_clean();
 		}
-		else
-		{
-			require($_viewFile_);
-		}
+
+		require($_viewFile_);
+		return null;
 	}
 
 	/**
@@ -237,20 +255,19 @@ abstract class Widget
 	 * Example:
 	 * ```php
 	 * echo ProgressBar::widget([
-	 * 		'percent' => 40
+	 *        'percent' => 40
 	 * ]);
 	 * ```
-	 * @param mixed[] $config
-	 * @return string HTML widget
+	 * @param array|string|null $config
+	 * @param Widget|null       $owner
+	 * @return Widget HTML widget
 	 */
-	public static function widget($config = [])
+	public static function widget(array|string|null $config = [], Widget $owner = null): Widget
 	{
-		ob_start();
-		ob_implicit_flush(false);
-		/* @var $widget MsWidget */
+		/* @var $widget Widget */
 		if (static::class === __CLASS__)
 		{
-			throw new WidgetException(sprintf('Method widget must be called from extending class, not from `%s`', __CLASS__));
+			throw new UnexpectedValueException(sprintf('Method widget must be called from extending class, not from `%s`', __CLASS__));
 		}
 		if (is_string($config))
 		{
@@ -258,35 +275,32 @@ abstract class Widget
 			$config = [];
 			$config['class'] = $class;
 		}
-		else
+		elseif (is_array($config))
 		{
 			$config['class'] = static::class;
 		}
-		$widget = EmbeDi::fly()->apply($config);
+		else
+		{
+			$config = [
+				'class' => static::class
+			];
+		}
+		$widget = new $config['class']($config, $owner);
+		assert($widget instanceof WidgetInterface);
 		$widget->init();
-		$out = $widget->run();
 
-		return ob_get_clean() . $out;
+		return $widget;
 	}
 
 	/**
-	 * This is equivalent of calling ::widget() with config from constructor.
-	 * Could be used for convenient outputting of simple widgets.
-	 * Example:
-	 * ```php
-	 * echo new Flags([], $this);
-	 * echo new Head(['title' => 'foot'], $this);
-	 * ```
 	 * @return string HTML output of widget.
 	 */
 	public function __toString()
 	{
 		try
 		{
-			$class = static::class;
-			return $class::widget($this->config);
-		}
-		catch (Exception $e)
+			return $this->run();
+		} catch (Exception $e)
 		{
 			return nl2br($e->getTraceAsString());
 		}

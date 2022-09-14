@@ -9,8 +9,8 @@
 namespace Maslosoft\MiniView\Renderers;
 
 use Maslosoft\MiniView\Interfaces\ViewRendererInterface;
-use Twig_Environment;
-use Twig_Loader_Filesystem;
+use Twig\Environment;
+use Twig\Loader\FilesystemLoader;
 
 /**
  * TwigRenderer
@@ -20,10 +20,10 @@ use Twig_Loader_Filesystem;
 class TwigRenderer implements ViewRendererInterface
 {
 
-	public function render($viewFile, $data, $return = false)
+	public function render(string $viewFile, array $data = null, bool $return = false): ?string
 	{
-		$loader = new Twig_Loader_Filesystem(dirname($viewFile));
-		$twig = new Twig_Environment($loader, array(
+		$loader = new FilesystemLoader(dirname($viewFile));
+		$twig = new Environment($loader, array(
 			'cache' => 'runtime',
 		));
 
@@ -31,10 +31,9 @@ class TwigRenderer implements ViewRendererInterface
 		{
 			return $twig->render(basename($viewFile), $data);
 		}
-		else
-		{
-			return $twig->display(basename($viewFile), $data);
-		}
+
+		$twig->display(basename($viewFile), $data);
+		return null;
 	}
 
 }

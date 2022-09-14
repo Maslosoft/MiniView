@@ -7,7 +7,7 @@ use Maslosoft\MiniView\MiniView;
 use Maslosoft\MiniView\Renderers\PhpRenderer;
 use Maslosoft\MiniView\Renderers\TwigRenderer;
 use PHPUnit\Framework\SkippedTestError;
-use Twig_Environment;
+use Twig\Environment;
 use UnitTester;
 
 class TwigTest extends Test
@@ -20,7 +20,7 @@ class TwigTest extends Test
 
 	protected function _before()
 	{
-		if (!class_exists(Twig_Environment::class))
+		if (!class_exists(Environment::class))
 		{
 			throw new SkippedTestError('Twig engine not installed');
 		}
