@@ -1,7 +1,7 @@
 <!--header-->
 <!-- Auto generated do not modify between `header` and `/header` -->
 
-# <a href="https://maslosoft.com/miniview/">Maslosoft Miniview</a>
+# <a href="https://maslosoft.com/miniview/"><img src="https://maslosoft.com/miniview/miniview.svg" style="height:24px;" alt="Miniview Logo"></a> <a href="https://maslosoft.com/miniview/">Maslosoft Miniview</a>
 <a href="https://maslosoft.com/miniview/">_Mini view is minimal template rendering library with pluggable template engines. Out of the box it support plain PHP templates, Latte and Twig._</a>
 
 <a href="https://packagist.org/packages/maslosoft/miniview" title="Latest Stable Version">
