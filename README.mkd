@@ -2,25 +2,51 @@
 <!-- Auto generated do not modify between `header` and `/header` -->
 
 # <a href="https://maslosoft.com/miniview/">Maslosoft Miniview</a>
-<a href="https://maslosoft.com/miniview/">_Mini view is minimal template rendering library based on Yii controller renderer_</a>
+<a href="https://maslosoft.com/miniview/">_Mini view is minimal template rendering library with pluggable template engines. Out of the box it support plain PHP templates, Latte and Twig._</a>
 
 <a href="https://packagist.org/packages/maslosoft/miniview" title="Latest Stable Version">
-<img src="https://poser.pugx.org/maslosoft/miniview/v/stable.svg" alt="Latest Stable Version" style="height: 20px;">
+<img src="https://poser.pugx.org/maslosoft/miniview/v/stable.svg" alt="Latest Stable Version" style="height: 20px;"/>
 </a>
 <a href="https://packagist.org/packages/maslosoft/miniview" title="License">
-<img src="https://poser.pugx.org/maslosoft/miniview/license.svg" alt="License" style="height: 20px;">
+<img src="https://poser.pugx.org/maslosoft/miniview/license.svg" alt="License" style="height: 20px;"/>
 </a>
 <a href="https://scrutinizer-ci.com/g/Maslosoft/Miniview/?branch=master">
-<img src="https://scrutinizer-ci.com/g/Maslosoft/Miniview/badges/quality-score.png?b=master">
+	<img src="https://scrutinizer-ci.com/g/Maslosoft/Miniview/badges/quality-score.png?b=master" alt="Scrutinizer Code Quality"/>
 </a>
 <a href="https://scrutinizer-ci.com/g/Maslosoft/Miniview/?branch=master">
-<img src="https://scrutinizer-ci.com/g/Maslosoft/Miniview/badges/coverage.png?b=master">
+	<img src="https://scrutinizer-ci.com/g/Maslosoft/Miniview/badges/coverage.png?b=master" alt="Code Coverage" />
 </a>
 
 ### Quick Install
 ```bash
 composer require maslosoft/miniview
 ```
+
+### Documentation
+
+<a href="https://maslosoft.com/miniview/docs/">Full Miniview Documentation</a>
+
+
+
+
+# Minimal PHP view
+
+PHP itself is a kind of templating language. Some other
+supplemental languages have been implemented too. To
+use each one of them, we need to know how to use it,
+locate file exacly, and use some low-level commands like `require`.
+
+### Common interface
+
+This view library provides common interface for PHP, or other
+templating engines, with option to extend it. Main power
+of miniview, is that it requires minimum code and effort
+to use MVC like views. It will also locate file relativelly
+to currently used class. It is safe to use with any functions
+directly outputting text, as it will capture any output and allow
+it to be passed anywhere, or just be displayed.
+
+
 
 <!--/header-->
 
