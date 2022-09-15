@@ -5,15 +5,17 @@
 <a href="https://maslosoft.com/miniview/">_Mini view is minimal template rendering library based on Yii controller renderer_</a>
 
 <a href="https://packagist.org/packages/maslosoft/miniview" title="Latest Stable Version">
-<img src="https://poser.pugx.org/maslosoft/miniview/v/stable.svg" alt="Latest Stable Version" style="height: 20px;"/>
+<img src="https://poser.pugx.org/maslosoft/miniview/v/stable.svg" alt="Latest Stable Version" style="height: 20px;">
 </a>
 <a href="https://packagist.org/packages/maslosoft/miniview" title="License">
-<img src="https://poser.pugx.org/maslosoft/miniview/license.svg" alt="License" style="height: 20px;"/>
+<img src="https://poser.pugx.org/maslosoft/miniview/license.svg" alt="License" style="height: 20px;">
 </a>
-[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/Maslosoft/Miniview/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/Maslosoft/Miniview/?branch=master)
-[![Code Coverage](https://scrutinizer-ci.com/g/Maslosoft/Miniview/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/Maslosoft/Miniview/?branch=master)
-<img src="https://travis-ci.org/Maslosoft/Miniview.svg?branch=master"/>
-<img src="http://hhvm.h4cc.de/badge/maslosoft/miniview.svg?style=flat"/>
+<a href="https://scrutinizer-ci.com/g/Maslosoft/Miniview/?branch=master">
+<img src="https://scrutinizer-ci.com/g/Maslosoft/Miniview/badges/quality-score.png?b=master">
+</a>
+<a href="https://scrutinizer-ci.com/g/Maslosoft/Miniview/?branch=master">
+<img src="https://scrutinizer-ci.com/g/Maslosoft/Miniview/badges/coverage.png?b=master">
+</a>
 
 ### Quick Install
 ```bash
