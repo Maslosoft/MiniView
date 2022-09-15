@@ -1,9 +1,15 @@
 <?php
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+/**
+ * Mini view is minimal template rendering library with pluggable template engines. Out of the box it support plain PHP templates, Latte and Twig.
+ *
+ * This software package is licensed under `AGPL, Commercial` license[s].
+ *
+ * @package maslosoft/miniview
+ * @license AGPL, Commercial
+ *
+ * @copyright Copyright (c) Peter Maselkowski <pmaselkowski@gmail.com>
+ * @link https://maslosoft.com/miniview/
  */
 
 namespace Maslosoft\MiniView\Renderers;
