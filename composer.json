@@ -1,6 +1,6 @@
 {
 	"name": "maslosoft/miniview",
-	"description": "Mini view is minimal template rendering library based on Yii controller renderer",
+	"description": "Mini view is minimal template rendering library with pluggable template engines. Out of the box it support plain PHP templates, Latte and Twig.",
 	"license": [
 		"AGPL",
 		"Commercial"
@@ -25,7 +25,7 @@
 	},
 	"require-dev": {
 		"codeception/codeception": "^4",
-		"codeception/module-asserts": "^1",
+		"codeception/module-asserts": "^2",
 		"latte/latte": "^3",
 		"twig/twig": "^3"
 	},
@@ -34,7 +34,7 @@
 		"maslosoft/embedi": "^2"
 	},
 	"suggest": {
-		"latte/latte": "Use tatte templates",
-		"twig/twig": "Use twig templates"
+		"latte/latte": "To use tatte templates",
+		"twig/twig": "To use twig templates"
 	}
 }
