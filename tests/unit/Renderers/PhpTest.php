@@ -2,14 +2,14 @@
 
 namespace Renderers;
 
-use Codeception\TestCase\Test;
+use Codeception\Test\Unit;
 use Maslosoft\MiniView\MiniView;
 use Maslosoft\MiniView\Renderers\PhpRenderer;
 use UnitTester;
 use function codecept_debug;
 use function trim;
 
-class PhpTest extends Test
+class PhpTest extends Unit
 {
 
 	/**

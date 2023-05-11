@@ -24,8 +24,8 @@
 		}
 	},
 	"require-dev": {
-		"codeception/codeception": "^4",
-		"codeception/module-asserts": "^2",
+		"codeception/codeception": "^5",
+		"codeception/module-asserts": "^3",
 		"latte/latte": "^3",
 		"twig/twig": "^3"
 	},

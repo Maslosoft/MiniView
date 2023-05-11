@@ -2,15 +2,14 @@
 
 namespace Renderers;
 
-use Codeception\TestCase\Test;
+use Codeception\Test\Unit;
 use Latte\Engine;
 use Maslosoft\MiniView\MiniView;
 use Maslosoft\MiniView\Renderers\LatteRenderer;
 use Maslosoft\MiniView\Renderers\PhpRenderer;
-use PHPUnit\Framework\SkippedTestError;
 use UnitTester;
 
-class LatteTest extends Test
+class LatteTest extends Unit
 {
 
 	/**
@@ -22,7 +21,7 @@ class LatteTest extends Test
 	{
 		if (!class_exists(Engine::class))
 		{
-			throw new SkippedTestError('Latte engine not installed');
+			$this->markTestSkipped('Latte engine not installed');
 		}
 	}
 
