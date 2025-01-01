@@ -38,7 +38,7 @@ class PhpRenderer implements ViewRendererInterface, OwnerAwareInterface, OwnerFo
 	 * @param bool   $_return_
 	 * @return string|null
 	 */
-	public function render(string $_viewFile_, array $_data_ = null, bool $_return_ = false): ?string
+	public function render(string $_viewFile_, ?array $_data_ = null, bool $_return_ = false): ?string
 	{
 		// we use special variable names here to avoid conflict when extracting data
 		if (is_array($_data_))

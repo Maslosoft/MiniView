@@ -21,5 +21,5 @@ namespace Maslosoft\MiniView\Interfaces;
 interface ViewRendererInterface
 {
 
-	public function render(string $viewFile, array $data = null, bool $return = false): ?string;
+	public function render(string $viewFile, ?array $data = null, bool $return = false): ?string;
 }

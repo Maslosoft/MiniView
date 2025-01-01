@@ -25,7 +25,7 @@ use Maslosoft\MiniView\Interfaces\ViewRendererInterface;
 class LatteRenderer implements ViewRendererInterface
 {
 
-	public function render(string $viewFile, array $data = null, bool $return = false): ?string
+	public function render(string $viewFile, ?array $data = null, bool $return = false): ?string
 	{
 		$latte = new Engine();
 		$latte->setTempDirectory('runtime');

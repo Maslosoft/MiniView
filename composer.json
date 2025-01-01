@@ -31,7 +31,7 @@
 	},
 	"require": {
 		"php": ">=8.1",
-		"maslosoft/embedi": "^2"
+		"maslosoft/embedi": "^2|^3"
 	},
 	"suggest": {
 		"latte/latte": "To use tatte templates",

@@ -1,2 +1,3 @@
 <?php
-// This is global bootstrap for autoloading
+echo 'PHP: ' . PHP_VERSION . PHP_EOL;
+error_reporting(E_ALL);

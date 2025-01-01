@@ -26,12 +26,12 @@ use Twig\Loader\FilesystemLoader;
 class TwigRenderer implements ViewRendererInterface
 {
 
-	public function render(string $viewFile, array $data = null, bool $return = false): ?string
+	public function render(string $viewFile, ?array $data = null, bool $return = false): ?string
 	{
 		$loader = new FilesystemLoader(dirname($viewFile));
-		$twig = new Environment($loader, array(
+		$twig = new Environment($loader, [
 			'cache' => 'runtime',
-		));
+		]);
 
 		if ($return)
 		{

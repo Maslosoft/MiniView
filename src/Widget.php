@@ -200,7 +200,7 @@ abstract class Widget implements WidgetInterface
 	 * @param bool       $return
 	 * @return string|null
 	 */
-	public function render(string $view, array $data = null, bool $return = false): ?string
+	public function render(string $view, ?array $data = null, bool $return = false): ?string
 	{
 		$viewFile = sprintf('%s/%s/%s.php', $this->_path, $this->_viewsPath, $view);
 		return $this->_renderInternal($viewFile, $data, $return);
@@ -213,7 +213,7 @@ abstract class Widget implements WidgetInterface
 	 * @param bool       $return
 	 * @return string|null
 	 */
-	public function renderFile(string $file, array $data = null, bool $return = false): ?string
+	public function renderFile(string $file, ?array $data = null, bool $return = false): ?string
 	{
 		return $this->_renderInternal($file, $data, $return);
 	}
@@ -227,7 +227,7 @@ abstract class Widget implements WidgetInterface
 	 * @param boolean    $_return_   whether the rendering result should be returned as a string
 	 * @return string|null the rendering result. Null if the rendering result is not required.
 	 */
-	private function _renderInternal(string $_viewFile_, array $_data_ = null, bool $_return_ = false): ?string
+	private function _renderInternal(string $_viewFile_, ?array $_data_ = null, bool $_return_ = false): ?string
 	{
 		// we use special variable names here to avoid conflict when extracting data
 		if (is_array($_data_))
@@ -263,7 +263,7 @@ abstract class Widget implements WidgetInterface
 	 * @param Widget|null       $owner
 	 * @return Widget HTML widget
 	 */
-	public static function widget(array|string|null $config = [], Widget $owner = null): Widget
+	public static function widget(array|string|null $config = [], ?Widget $owner = null): Widget
 	{
 		/* @var $widget Widget */
 		if (static::class === __CLASS__)
