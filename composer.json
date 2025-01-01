@@ -1,6 +1,6 @@
 {
     "name": "maslosoft/miniview",
-    "version": "2.0.3",
+    "version": "2.0.4",
     "description": "Mini view is minimal template rendering library with pluggable template engines. Out of the box it support plain PHP templates, Latte and Twig.",
     "license": [
         "AGPL",
