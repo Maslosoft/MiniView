@@ -1,40 +1,41 @@
 {
-	"name": "maslosoft/miniview",
-	"description": "Mini view is minimal template rendering library with pluggable template engines. Out of the box it support plain PHP templates, Latte and Twig.",
-	"license": [
-		"AGPL",
-		"Commercial"
-	],
-	"homepage": "https://maslosoft.com/miniview/",
-	"authors": [
-		{
-			"name": "Peter Maselkowski",
-			"email": "pmaselkowski@gmail.com"
-		}
-	],
-	"minimum-stability": "stable",
-	"autoload": {
-		"psr-4": {
-			"Maslosoft\\MiniView\\": "src/"
-		}
-	},
-	"autoload-dev": {
-		"psr-4": {
-			"Tests\\Widgets\\": "tests/widgets"
-		}
-	},
-	"require-dev": {
-		"codeception/codeception": "^5",
-		"codeception/module-asserts": "^3",
-		"latte/latte": "^3",
-		"twig/twig": "^3"
-	},
-	"require": {
-		"php": ">=8.1",
-		"maslosoft/embedi": "^2|^3"
-	},
-	"suggest": {
-		"latte/latte": "To use tatte templates",
-		"twig/twig": "To use twig templates"
-	}
+    "name": "maslosoft/miniview",
+    "version": "2.0.3",
+    "description": "Mini view is minimal template rendering library with pluggable template engines. Out of the box it support plain PHP templates, Latte and Twig.",
+    "license": [
+        "AGPL",
+        "Commercial"
+    ],
+    "homepage": "https://maslosoft.com/miniview/",
+    "authors": [
+        {
+            "name": "Peter Maselkowski",
+            "email": "pmaselkowski@gmail.com"
+        }
+    ],
+    "minimum-stability": "stable",
+    "autoload": {
+        "psr-4": {
+            "Maslosoft\\MiniView\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Tests\\Widgets\\": "tests/widgets"
+        }
+    },
+    "require-dev": {
+        "codeception/codeception": "^5",
+        "codeception/module-asserts": "^3",
+        "latte/latte": "^3",
+        "twig/twig": "^3"
+    },
+    "require": {
+        "php": ">=8.1",
+        "maslosoft/embedi": "^2|^3"
+    },
+    "suggest": {
+        "latte/latte": "To use tatte templates",
+        "twig/twig": "To use twig templates"
+    }
 }
