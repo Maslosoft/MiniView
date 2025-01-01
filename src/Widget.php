@@ -74,7 +74,7 @@ abstract class Widget implements WidgetInterface
 	 * @param string|array $config
 	 * @param Widget|null  $owner
 	 */
-	public function __construct(string|array $config = [], Widget $owner = null)
+	public function __construct(string|array $config = [], ?Widget $owner = null)
 	{
 		$class = new ReflectionObject($this);
 		$this->_path = dirname($class->getFileName());

@@ -65,7 +65,7 @@ class MiniView implements ViewRendererInterface, OwnerAwareInterface, RendererAw
 	 * @param object      $owner
 	 * @param string|null $path
 	 */
-	public function __construct(object $owner, string $path = null)
+	public function __construct(object $owner, ?string $path = null)
 	{
 		$this->path = $path;
 		$this->setOwner($owner);
